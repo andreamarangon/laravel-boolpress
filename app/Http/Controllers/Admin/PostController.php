@@ -64,7 +64,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -75,7 +75,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -87,7 +87,17 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string'
+        ]);
+
+        $data = $request->all();
+        $data['slug'] = $this->generateSlug($data['title'], $post->title != $data['title'], $post->slug);
+
+        $post->update($data);
+
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -98,11 +108,17 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 
-    private function generateSlug(string $title)
+    private function generateSlug(string $title, bool $change = true, string $old_slug = '')
     {
+
+        if (!$change) {
+            return $old_slug;
+        }
         $slug = Str::slug($title, '-');
         $slug_base = $slug;
         $contatore = 1;

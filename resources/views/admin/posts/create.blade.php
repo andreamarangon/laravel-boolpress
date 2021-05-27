@@ -2,33 +2,33 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Nuovo post</h3>
-        </div>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Nuovo post</h3>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <form action="{{route('admin.posts.store')}}" method="post">
-                @csrf
-                @method('POST')
-                <div class="form-group">
-                    <label for="title">Title</label>
-                    <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{old('title')}}">
-                    @error('title')
-                    <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="content">Content</label>
-                    <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content">{{old('content')}}</textarea>
-                    @error('content')
-                    <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-                <button class="btn btn-primary" type="submit">Salva</button>
-            </form>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form action="{{route('admin.posts.store')}}" method="post">
+        @csrf
+        @method('POST')
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{old('title')}}">
+          @error('title')
+          <small class="text-danger">{{ $message }}</small>
+          @enderror
         </div>
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content">{{old('content')}}</textarea>
+          @error('content')
+          <small class="text-danger">{{ $message }}</small>
+          @enderror
+        </div>
+        <button class="btn btn-primary" type="submit">Salva</button>
+      </form>
     </div>
+  </div>
 </div>
 @endsection
