@@ -12,15 +12,17 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//rotte guest
 Route::get('/', 'HomeController@index')->name('index');
-Route::get('posts', 'PostController@index')->name('guests-posts.index');
+Route::get('posts', 'PostController@index')->name('posts.index');
 Route::get('posts/{slug}', 'PostController@show')->name('posts.show');
-
+Route::get('categories/{slug}', 'CategoryController@index')->name('category.index');
 Auth::routes();
 
+//rotte admin
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
     ->group(function () {
     Route::get('/', 'HomeController@index')->name('index');
     Route::resource('posts', 'PostController');
+    Route::resource('categories', 'CategoryController');
 });

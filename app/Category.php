@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Category extends Model
 {
     protected $fillable = [
         'title',
         'content',
         'slug',
         'cover',
-        'category_id'
+        'category_id',
     ];
 }
