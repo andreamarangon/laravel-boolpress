@@ -6,6 +6,7 @@
     <div class="col-md-3">
       <div class="card">
         <div class="card-header">{{ $post->title }}</div>
+        <h4 class="card-body">Category: {{$post->category->name}}</h4>
 
         <div class="card-body">
           {{$post->content}}

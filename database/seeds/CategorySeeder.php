@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Category;
+use Illuminate\Support\Str;
 
 class CategorySeeder extends Seeder
 {
@@ -11,6 +13,14 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        //
+        $categories =['arte','cucina', 'moda', 'musica'];
+
+        foreach ($categories as $category) {
+            $category_obj = new Category();
+            $category_obj->name = $category;
+            $category_obj->slug = Str::slug($category, '-');
+
+            $category_obj->save();
+        }
     }
 }

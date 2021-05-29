@@ -13,6 +13,19 @@
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control @error('category') is-invalid @enderror" name="category_id" id="category">
+                    <option value="">Select</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category->id}}" {{ $category->id == old('category_id', $post->category_id) ? 'selected' : ''}}>{{$category->name}}</option>
+                    @endforeach
+                </select>
+                @error('category')
+                <small class="text-danger">{{ $message }}</small>
+                @enderror
+                </div>
+                
+                <div class="form-group">
                     <label for="title">Title</label>
                     <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{old('title', $post->title)}}">
                     @error('title')
