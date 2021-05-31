@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -6,9 +6,7 @@
     <div class="col-md-3">
       <div class="card">
         <div class="card-header">{{ $post->title }}</div>
-          @if($post->category)
-          <a href=" {{ route('category.index', ['slug' => $post->category->slug])}}"> {{$post->category->name}}</a></h4>
-          @endif
+        <h4 class="card-body">Category: {{$post->category->name}}</h4>
 
         <div class="card-body">
           {{$post->content}}

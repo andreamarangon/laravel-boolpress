@@ -52,14 +52,19 @@ class PostController extends Controller
 
         $data = $request->all();
 
-        $cover = Storage::put('uploads', $data['cover']);
-
         $post = new Post();
         $post->fill($data);
 
 
         $post->slug = $this->generateSlug($post->title);
-        $post->cover = $cover;
+
+        if (array_key_exists('cover', $data)) {
+            $cover = Storage::put('uploads', $data['cover']);
+            $post->cover = $cover;
+
+        }
+
+
         $post->save();
         return redirect()->route('admin.posts.index');
 

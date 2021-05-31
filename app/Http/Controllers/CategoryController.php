@@ -12,9 +12,13 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(string $slug)
     {
-        //
+        //stampo tutti i post di una determinata categoria
+        $category = Category::with('posts')->where('slug', '=', $slug)->first();
+
+        return view('guests.posts.index')->with('posts', $category->posts);
+
     }
 
     /**
