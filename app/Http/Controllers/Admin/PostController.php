@@ -6,8 +6,10 @@ use App\Post;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\SendNewMail;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 
 
 class PostController extends Controller
@@ -51,7 +53,6 @@ class PostController extends Controller
         ]);
 
         $data = $request->all();
-        $cover = Storage::put('uploads', $data['cover']);
         $post = new Post();
         $post->fill($data);
 
@@ -64,6 +65,9 @@ class PostController extends Controller
         }
 
         $post->save();
+
+        Mail::to('mail@mail.it')->send(new SendNewMail());
+
         return redirect()->route('admin.posts.index');
 
     }
