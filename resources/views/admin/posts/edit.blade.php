@@ -9,7 +9,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form action="{{route('admin.posts.update', ['post'=> $post->id])}}" method="post">
+            <form action="{{route('admin.posts.update', ['post'=> $post->id])}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
@@ -39,6 +39,18 @@
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>
+
+                <div class="form-group">
+                   <img class="img-fluid" src="{{asset($post->cover)}}" alt=""> 
+                </div>
+                <div class="form-group">
+                    <label for="content">Cover</label>
+                    <input class="form-control-file @error('cover') is-invalid @enderror" type="file" name="cover" value="">
+                    @error('cover')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+
                 <button class="btn btn-primary" type="submit">Salva</button>
             </form>
         </div>

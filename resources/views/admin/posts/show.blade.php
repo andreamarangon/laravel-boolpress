@@ -6,10 +6,12 @@
     <div class="col-md-3">
       <div class="card">
         <div class="card-header">{{ $post->title }}</div>
-          @if($post->category)
-          <a href=" {{ route('category.index', ['slug' => $post->category->slug])}}"> {{$post->category->name}}</a></h4>
-          @endif
-
+        @if($post->category)
+        <h4>{{$post->category->name}}</h4>
+        @endif
+        @if($post->cover)
+        <img src="{{asset($post->cover)}}" alt="{{$post->title}}">
+        @endif
         <div class="card-body">
           {{$post->content}}
         </div>
