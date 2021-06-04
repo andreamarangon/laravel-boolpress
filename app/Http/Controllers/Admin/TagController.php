@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
-use App\Http\Controllers\Controller;
+use App\Tag;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 
-
-class CategoryController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.tags.index', compact('tags'));
     }
 
     /**
@@ -29,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.tags.create');
     }
 
     /**
@@ -47,42 +46,42 @@ class CategoryController extends Controller
         $data = $request->all();
 
         $data['slug'] = $this->generateSlug($data['name']);
-        $category = new Category();
-        $category->create($data);
+        $tag = new tag();
+        $tag->create($data);
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.tags.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Category $category
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Tag $tag)
     {
-        return view('admin.categories.show', compact('category'));
+        return view('admin.tags.show', compact('tag'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Category $category
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Tag $tag)
     {
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Category $category
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Tag $tag)
     {
         $request->validate([
             'name' => 'required|string|max:255'
@@ -90,23 +89,23 @@ class CategoryController extends Controller
 
         $data = $request->all();
 
-        $data['slug'] = $this->generateSlug($data['name'], $data['name'] != $category->name, $category->slug);
-        $category->update($data);
+        $data['slug'] = $this->generateSlug($data['name'], $data['name'] != $tag->name, $tag->slug);
+        $tag->update($data);
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.tags.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Category $category
+     * @param  \App\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Tag $tag)
     {
-        $category->delete();
+        $tag->delete();
 
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.tags.index');
     }
 
     private function generateSlug(string $title, bool $change = true, string $old_slug = '')
@@ -118,11 +117,11 @@ class CategoryController extends Controller
         $slug = Str::slug($title, '-');
         $slug_base = $slug;
         $contatore = 1;
-        $post_with_slug = Category::where('slug', '=', $slug)->first();
+        $post_with_slug = Tag::where('slug', '=', $slug)->first();
         while ($post_with_slug) {
             $slug = $slug_base . '-' . $contatore;
             $contatore++;
-            $post_with_slug = Category::where('slug', '=', $slug)->first();
+            $post_with_slug = Tag::where('slug', '=', $slug)->first();
         }
 
         return $slug;
