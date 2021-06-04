@@ -13,18 +13,18 @@
                 @csrf
                 @method('PATCH')
                 <div class="form-group">
-                <label for="category">Category</label>
-                <select class="form-control @error('category') is-invalid @enderror" name="category_id" id="category">
-                    <option value="">Select</option>
-                    @foreach($categories as $category)
+                    <label for="category">Category</label>
+                    <select class="form-control @error('category') is-invalid @enderror" name="category_id" id="category">
+                        <option value="">Select</option>
+                        @foreach($categories as $category)
                         <option value="{{$category->id}}" {{ $category->id == old('category_id', $post->category_id) ? 'selected' : ''}}>{{$category->name}}</option>
-                    @endforeach
-                </select>
-                @error('category')
-                <small class="text-danger">{{ $message }}</small>
-                @enderror
+                        @endforeach
+                    </select>
+                    @error('category')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
-                
+
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" id="title" value="{{old('title', $post->title)}}">
@@ -41,12 +41,23 @@
                 </div>
 
                 <div class="form-group">
-                   <img class="img-fluid" src="{{asset($post->cover)}}" alt=""> 
+                    <img class="img-fluid" src="{{asset($post->cover)}}" alt="">
                 </div>
                 <div class="form-group">
                     <label for="content">Cover</label>
                     <input class="form-control-file @error('cover') is-invalid @enderror" type="file" name="cover" value="">
                     @error('cover')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="tag">Tags</label>
+                    <select class="form-control @error('tag_ids') is-invalid @enderror" name="tag_ids[]" id="tag" multiple>
+                        @foreach($tags as $tag)
+                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                        @endforeach
+                    </select>
+                    @error('tag_ids')
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
                 </div>

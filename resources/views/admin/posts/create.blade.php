@@ -9,7 +9,7 @@
   </div>
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <form action="{{route('admin.posts.store')}}" method="post"  enctype="multipart/form-data">
+      <form action="{{route('admin.posts.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="form-group">
@@ -45,6 +45,18 @@
           <small class="text-danger">{{ $message }}</small>
           @enderror
         </div>
+        <div class="form-group">
+          <label for="tag">Tags</label>
+          <select class="form-control @error('tag_ids') is-invalid @enderror" name="tag_ids[]" id="tag" multiple>
+            @foreach($tags as $tag)
+            <option value="{{$tag->id}}">{{$tag->name}}</option>
+            @endforeach
+          </select>
+          @error('tag_ids')
+          <small class="text-danger">{{ $message }}</small>
+          @enderror
+        </div>
+
 
         <button class="btn btn-primary" type="submit">Salva</button>
       </form>
