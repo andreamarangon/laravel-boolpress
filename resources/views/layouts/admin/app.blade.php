@@ -28,21 +28,33 @@
         <a class="navbar-brand" href="{{ url('/') }}">
           Boolpress
         </a>
-        <a class="navbar-link" href="{{ route('admin.posts.index') }}">
-          Posts
-        </a>
-        <a class="navbar-link" href="{{ route('admin.index') }}">
-          Dashboard
-        </a>
-        <a class="navbar-link" href="">
-          Users
-        </a>
-        <a class="navbar-link" href="{{ route('admin.categories.index') }}">
-          Categories
-        </a>
-        <a class="navbar-link" href="{{route('admin.tags.index')}}">
-          Tags
-        </a>
+        <ul class="navbar-nav ml-5">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.posts.index') }}">
+              Posts
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.index') }}">
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="">
+              Users
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.categories.index') }}">
+              Categories
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.tags.index')}}">
+              Tags
+            </a>
+          </li>
+        </ul>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
           <span class="navbar-toggler-icon"></span>
         </button>
